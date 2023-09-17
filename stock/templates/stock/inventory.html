@@ -1,0 +1,75 @@
+{%extends 'base/layout.html'%} {%block title%}Inventory overview{%endblock%}
+{%block content%}
+
+<div class="container">
+	<div class="p-2 card">
+	 	<div class="d-flex justify-content-start">
+			<a href="{%url 'stock:dashboard'%}" class="link text-dark"> home/</a>
+			<a href="#" class="link text-dark"> &nbsp;inventory-overview/</a>
+		</div>
+	</div>
+
+	<div class="my-2 row gy-5">
+		<div class="col-6 col-md-4" style="height: 12rem">
+			<ul class="list-group">
+				<li class="bg-dark bg-opacity-75 text-white list-group-item">
+					<br />
+					<p class="text-center fs-1">22</p>
+					<p class="text-center">Total number of inventory</p>
+				</li>
+				<li class="list-group-item">All inventory</li>
+			</ul>
+		</div>
+
+		<div class="col-6 col-md-4" style="height: 12rem">
+			<ul class="list-group">
+				<li class="bg-dark bg-opacity-75 text-white list-group-item">
+					<br />
+					<p class="text-center fs-1">22</p>
+					<p class="text-center">Total number of inventory</p>
+				</li>
+				<li class="list-group-item">All inventory</li>
+			</ul>
+		</div>
+
+		<div
+			class="col-6 col-md-4"
+			style="height: 12rem"
+		>
+			<ul class="list-group">
+				<li class="bg-dark bg-opacity-75 text-white list-group-item">
+					<br />
+					<p class="text-center fs-1">22</p>
+					<p class="text-center">Total number of inventory</p>
+				</li>
+				<li class="list-group-item">All inventory</li>
+			</ul>
+		</div>
+
+		<div class="card p-2">
+			<h5>Quick acions</h3>
+			<div>
+			<button type="button" class="btn btn-secondary m-2">Add new inventory</button>
+			<button type="button" class="btn btn-secondary m-2">Add customer</button>
+			<button type="button" class="btn btn-secondary m-2">Restock existing inventory</button>
+			<button type="button" class="btn btn-secondary m-2">Create new category</button>
+			<button type="button" class="btn btn-secondary m-2">Create new new shelve</button>
+			<button type="button" class="btn btn-secondary m-2">show all transcation logs</button>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="row my-3">
+		<div class="col-12 col-md-8 ">
+			<div class="card"></div>
+		</div>
+
+		 <div class="col-12 col-md-4">
+			 <div class="card">
+			 </div>
+		</div>
+	</div>
+</div>
+
+{%endblock%}

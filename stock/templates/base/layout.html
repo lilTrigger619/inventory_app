@@ -1,0 +1,185 @@
+{%load static%}
+<html>
+	<head>
+		<meta name="author" content="Opoku Shadrack" />
+		<meta name="viewport" content="initial-scale=1.0" />
+		<title>In-man {%block title %} {%endblock%}</title>
+		<link
+			href="{% static 'bootstrap-5.3.2-dist/css/bootstrap.min.css' %}"
+			rel="stylesheet"
+		/>
+		<link
+			href="{%static 'css/header.css'%}"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<link
+			href="{% static 'css/layout.css' %}"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		{%block head%}{%endblock%}
+
+		<script src="{% static 'js/chart.umd.js' %}"></script>
+	</head>
+	<body>
+		<header>
+			<!-- header -->
+			<nav class="navbar navbar-expand-lg bg-dark">
+				<div class="container-fluid ">
+					<a class="navbar-brand  text-light" href="{%url 'stock:dashboard'%}"
+						>Stock-man</a
+					>
+					<button
+						class="navbar-toggler   text-light bg-light"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div
+						class="collapse navbar-collapse"
+						id="navbarSupportedContent"
+					>
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item">
+								<a
+									class="nav-link  text-light active"
+									aria-current="page"
+									href="{%url 'stock:dashboard'%}"
+									>Dashboard</a
+								>
+							</li>
+							<li class="nav-item dropdown">
+								<a
+									class="nav-link dropdown-toggle   text-light"
+									href="#"
+									role="button"
+									data-bs-toggle="dropdown"
+									aria-expanded="false"
+								>
+									Inventory
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a class="dropdown-item " href="{%url 'stock:inventory'%}"
+											>Overview</a
+										>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#"
+											>Categories</a
+										>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#"
+											>Shelves</a
+										>
+									</li>
+									<li><hr class="dropdown-divider" /></li>
+									<li>
+										<a class="dropdown-item" href="#"
+											>Add inventory</a
+										>
+									</li>
+								</ul>
+							</li>
+
+
+							<li class="nav-item dropdown">
+								<a
+									class="nav-link dropdown-toggle  text-light"
+									href="#"
+									role="button"
+									data-bs-toggle="dropdown"
+									aria-expanded="false"
+								>
+									Sales (Issued)
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a class="dropdown-item" href="#"
+											>Overview</a
+										>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#"
+											>Issue item</a
+										>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#"
+											>Create invoice</a
+										>
+									</li>
+
+									<li><hr class="dropdown-divider" /></li>
+									<li>
+										<a class="dropdown-item" href="#"
+											>Report spoilage</a
+										>
+									</li>
+								</ul>
+							</li>
+
+							<li class="nav-item dropdown">
+								<a
+									class="nav-link dropdown-toggle  text-light"
+									href="#"
+									role="button"
+									data-bs-toggle="dropdown"
+									aria-expanded="false"
+								>
+								Account
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a class="dropdown-item" href="#"
+											>Change password</a
+										>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#"
+											>Logout</a
+										>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<form class="d-flex" role="search">
+							<input
+								class="form-control me-2"
+								type="search"
+								placeholder="Search"
+								aria-label="Search"
+							/>
+							<button
+								class="btn btn-outline-success"
+								type="submit"
+							>
+								Search
+							</button>
+						</form>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<br />
+		<content> {%block content%} {%endblock%} </content>
+		<script src="{%static 'js/jquery-3.6.0.js' %}"></script>
+		<script
+			src="{% static 'bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js' %}"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="{% static 'js/index.js' %}"
+			type="text/javascript"
+		></script>
+		{% block scriptTag %}{% endblock %}
+	</body>
+</html>

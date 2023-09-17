@@ -1,0 +1,37 @@
+{%extends 'base/layout.html'%}
+{%block title%} test titltl {%endblock%}
+{%block content%} 
+<div class="container">
+	<div class="row">
+		<!--main-->
+		<div class="col-md-8">
+			<div class="card card-container">
+				<!-- chart -->
+				<canvas id="inventory_level_ctx" width="80%" height="50"></canvas>
+			</div>
+			<br/>
+			<br/>
+			<div class="row">
+				<div class=" col-7 card card-container">
+					<!-- chart -->
+					<canvas id="inventory-type-rate" width="12" height="20"></canvas>
+				</div>
+
+				<div class="card col-5 card-container">
+					<!-- chart -->
+					<h1>22</h1>
+					<p>number of stock</p>
+				</div>
+			</div>
+		</div>
+
+		<aside class="col-md-4">
+			<div class="card card-container">
+				hellow
+			</div>
+		</aside>
+	</div>
+</div>
+{% load static %}
+<script src="{% static 'js/dashboard/charts.js' %}"></script>
+{%endblock%}
