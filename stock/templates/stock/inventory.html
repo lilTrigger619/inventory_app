@@ -1,7 +1,7 @@
 {%extends 'base/layout.html'%} {%block title%}Inventory overview{%endblock%}
 {%block content%}
 
-<div class="container">
+<div class="container" style="">
 	<div class="p-2 card">
 	 	<div class="d-flex justify-content-start">
 			<a href="{%url 'stock:dashboard'%}" class="link text-dark"> home/</a>
@@ -14,7 +14,7 @@
 			<ul class="list-group">
 				<li class="bg-dark bg-opacity-75 text-white list-group-item">
 					<br />
-					<p class="text-center fs-1">22</p>
+					<p class="text-center fs-1">{{ inventory_count }}</p>
 					<p class="text-center">Total number of inventory</p>
 				</li>
 				<li class="list-group-item">All inventory</li>
@@ -25,10 +25,10 @@
 			<ul class="list-group">
 				<li class="bg-dark bg-opacity-75 text-white list-group-item">
 					<br />
-					<p class="text-center fs-1">22</p>
-					<p class="text-center">Total number of inventory</p>
+					<p class="text-center fs-1">{{ category_count }}</p>
+					<p class="text-center">Total number of Category</p>
 				</li>
-				<li class="list-group-item">All inventory</li>
+				<li class="list-group-item">All category</li>
 			</ul>
 		</div>
 
@@ -39,37 +39,92 @@
 			<ul class="list-group">
 				<li class="bg-dark bg-opacity-75 text-white list-group-item">
 					<br />
-					<p class="text-center fs-1">22</p>
-					<p class="text-center">Total number of inventory</p>
+					<p class="text-center fs-1">{{ shelve_count }}</p>
+					<p class="text-center">Total number of shelves</p>
 				</li>
-				<li class="list-group-item">All inventory</li>
+				<li class="list-group-item">All shelves</li>
 			</ul>
 		</div>
 
-		<div class="card p-2">
-			<h5>Quick acions</h3>
-			<div>
-			<button type="button" class="btn btn-secondary m-2">Add new inventory</button>
-			<button type="button" class="btn btn-secondary m-2">Add customer</button>
-			<button type="button" class="btn btn-secondary m-2">Restock existing inventory</button>
-			<button type="button" class="btn btn-secondary m-2">Create new category</button>
-			<button type="button" class="btn btn-secondary m-2">Create new new shelve</button>
-			<button type="button" class="btn btn-secondary m-2">show all transcation logs</button>
+	</div>
+
+		<div class="my-5 ">
+			<div class="card p-2">
+				<h5>Quick acions</h3>
+				<div>
+				<button type="button" class="btn btn-secondary m-2">Add new inventory</button>
+				<button type="button" class="btn btn-secondary m-2">Add customer</button>
+				<button type="button" class="btn btn-secondary m-2">Restock existing inventory</button>
+				<button type="button" class="btn btn-secondary m-2">Create new category</button>
+				<button type="button" class="btn btn-secondary m-2">Create new new shelve</button>
+				<button type="button" class="btn btn-secondary m-2">show all transcation logs</button>
+				</div>
 			</div>
 		</div>
 
-	</div>
-
-	<div class="row my-3">
+	<div class="row">
 		<div class="col-12 col-md-8 ">
-			<div class="card"></div>
+			<div class="card p-4">
+				<h4>Recent invetories</h4>
+				<table class="table">
+					<thead>
+						<tr class="table-dark">
+							<td>Item name</td>
+							<td>Category</td>
+							<td>Shelve</td>
+							<td>Quantity</td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for inventory in recent_inventories %}
+							<tr>
+								<td>{{ inventory.name }} {{ inventory.model }}</td >
+								<td>{{ inventory.category.title }}</td>
+								<td>{{ inventory.shelve.title }}</td>
+								<td>{{ inventory.quantity }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
 		</div>
 
 		 <div class="col-12 col-md-4">
-			 <div class="card">
+			 <div class="card p-3">
+				 <h5>Inventories out of stock ({{ inventory_out_of_stock.count }})</h5>
+				<table class="table">
+					<thead>
+						<tr class="table-dark">
+							<td>Item name</td>
+							<td>Quantity</td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for inventory in inventory_out_of_stock %}
+							<tr>
+								<td>{{ inventory.name }} {{ inventory.model }}</td >
+								<td>{{ inventory.quantity }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
 			 </div>
 		</div>
 	</div>
+
+	<div class="card">
+		<ul>
+			<li>
+				inventory level 
+				<p>Show a line chart for the inventory level</p>
+			</li>
+			<li>
+				number of defective stocks in a tabular form.
+			</li>
+		</ul>
+	</div>
+
+
 </div>
 
 {%endblock%}

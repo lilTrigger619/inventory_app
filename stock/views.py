@@ -18,8 +18,16 @@ def index(request):
 
 
 def Inventory_view(request):
+    context = {
+            "inventory_count":StockItem.objects.count(),
+            "category_count":Stock_category.objects.count(),
+            "shelve_count":Shelve.objects.count(),
+            "recent_inventories":StockItem.objects.reverse()[:10],
+            "inventory_out_of_stock":StockItem.objects.filter(quantity=0)
+            }
     template_name = "stock/inventory.html"
-    return render(request, template_name)
+    print("context", context)
+    return render(request, template_name, context)
 
 
 def add_inventory_view(request):
