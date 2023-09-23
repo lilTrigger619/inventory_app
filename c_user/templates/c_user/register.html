@@ -1,0 +1,97 @@
+{%extends './base.html'%} {%load static%} {% block title %} Login {%endblock%}
+{%block head %}
+<link href="{%static 'index.css'%}" rel="stylesheet" /> {%endblock%} 
+{% block content %}
+<div class="container">
+	<div class="max-w-50 m-auto">
+		{% if register_status and register_status != 201 %}
+		<div class="alert alert-danger alert-dismissible">
+			<button class="btn-close" data-bs-dismiss="alert" type="button">&times;</button>
+			<strong>Failed</strong> perform registeration!
+			{{ register_status }}
+		</div>
+		{% elif register_status == 201 %}
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button>
+				<strong>Registeration </strong>success.
+			</div>
+		{%endif%}
+		<form action="{%url 'auth:register'%}" method="POST">
+			{% csrf_token %}
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input type="email" name="email" required class="form-control" id="email"/>
+		</div>
+		<div class="form-group" id="existing-company">
+			<label for="company">Select company</label>
+			<select class="form-control" id="company" name="company" required>
+				{% for company in companies %}
+				<option value="{{company.id}}">
+					{{ company.title }}
+				</option>
+				{% endfor %}
+			</select>
+		</div>
+			<div class="form-group" id="new-company">
+				<label for="company">company name</label>
+				<input
+					type="text"
+					class="form-control"
+					id="company"
+					placeholder="company or group"
+					name="company"
+					required
+				/>
+			</div>
+			<div class="form-group"> 
+				<input class="" type="radio" name="company_type" value="new" id="new_company" checked aria-checked/>
+				<label for="new_company">New company</label>
+				<input type="radio" name="company_type" value="existing" id="existing_company"/>
+				<label for="existing_company">Existing company</label>
+			</div>
+			<div class="form-group">
+				<label for="username">username</label>
+				<input
+					type="text"
+					class="form-control"
+					id="username"
+					placeholder="eg. John"
+					name="username"
+					required
+				/>
+			</div>
+			<div class="form-group">
+				<label for="password">password</label>
+				<input
+					type="password"
+					class="form-control"
+					id="password"
+					placeholder=""
+					name="password"
+					required
+				/>
+			</div>
+			<div class="form-group">
+				<label for="re-password">re-password</label>
+				<input
+					type="password"
+					class="form-control"
+					id="re-password"
+					placeholder=""
+					name="re_password"
+					required
+				/>
+			</div>
+			<br />
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+		<br />
+		<p>
+			Already have an account? Click
+			<a href="{% url 'auth:login' %}">here</a> to login
+		</p>
+	</div>
+</div>
+{%endblock%} {%block scripts%}
+<script src="{%static 'register.js' %}"></script>
+{%endblock%}

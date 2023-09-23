@@ -1,0 +1,47 @@
+{%extends './base.html'%} {%load static%} {% block title %} Login {%endblock%}
+{%block head %}
+<link href="{%static 'index.css'%}" rel="stylesheet" /> {%endblock%} 
+{%block content%}
+<div class="container">
+	<div class="max-w-50 m-auto">
+		<form action="{%url 'auth:login'%}" method="POST">
+			<div class="form-group">
+				<label for="company">Company</label>
+				<select class="form-control" id="company" name="category" required>
+					{% for company in companies %}
+					<option value="{{company.id}}">{{ company.title }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="username">username</label>
+				<input
+					type="text"
+					class="form-control"
+					id="username"
+					placeholder="eg. John"
+					name="username"
+					required
+				/>
+			</div>
+			<div class="form-group">
+				<label for="password">password</label>
+				<input
+					type="password"
+					class="form-control"
+					id="password"
+					placeholder=""
+					name="password"
+					required
+				/>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+		<br />
+		<p>
+			Dont have an account? Click
+			<a href="{% url 'auth:register' %}">here</a> to register
+		</p>
+	</div>
+</div>
+{%endblock%} {%block scripts%} {%endblock%}

@@ -1,0 +1,38 @@
+{%load static%}
+<html>
+	<head>
+		<meta name="author" content="Opoku Shadrack" />
+		<meta name="viewport" content="initial-scale=1.0" />
+		<title>In-man {%block title %} {%endblock%}</title>
+		<link
+			href="{% static 'bootstrap-5.3.2-dist/css/bootstrap.min.css' %}"
+			rel="stylesheet"
+		/>
+		<link
+			href="{%static 'css/header.css'%}"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<link
+			href="{% static 'css/layout.css' %}"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		{%block head%}{%endblock%}
+
+		<script src="{% static 'js/chart.umd.js' %}"></script>
+	</head>
+	<body>
+
+		<content>
+			{%block content%}{%endblock%}
+		</content>
+
+		<script src="{%static 'js/jquery-3.6.0.js' %}"></script>
+		<script
+			src="{% static 'bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js' %}"
+			crossorigin="anonymous"
+		></script>
+		{% block scripts%}{%endblock%}
+	</body>
+</html>
