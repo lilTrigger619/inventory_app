@@ -1,12 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.views import LoginView
+from django.utils.html import json_script
 from .forms import RegisterForm
 from .models import Company, C_user
 
 
-def login_view(request):
+def login_temp_view(request):
     template = "./c_user/login.html"
     if not request.method == "POST":
-        return render(request, template)
+        print("redirection made")
+        return redirect("/auth/llogin")
+    return render(request, template)
 
 
 def register_view(request):
