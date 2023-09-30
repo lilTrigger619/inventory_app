@@ -10,6 +10,7 @@ class RegisterForm(forms.Form):
     re_password =  forms.CharField(max_length=255)
     email = forms.EmailField()
 
+"""
     def validate(self):
         print("validation took place!")
         # if company type is new then
@@ -27,3 +28,4 @@ class RegisterForm(forms.Form):
                 pass
         if self.password != self.re_password:
             raise forms.ValidationError("passwords do not match")
+        """

@@ -19,16 +19,26 @@ def register_view(request):
     if not request.method == "POST":
         return render(request, template)
     _form = RegisterForm(request.POST)
-    _form.validate()
+
     if _form.is_valid():
-        print("form data ", _form.cleaned_data)
+        # print("form data ", _form.cleaned_data)
+        # validation.
+        valid_field, err_reason = validate_register_fields(_form.cleaned_data)
+        if not valid_field:
+            print("not valid field ", err_reason)
+            return render(
+                request,
+                template,
+                {**context, "register_status": err_reason},
+            )
         try:
             new_company = Company.objects.create(title=_form.cleaned_data["company"])
-            C_user.objects.create(
+            u = C_user.objects.create(
                 username=_form.cleaned_data["username"],
                 email=_form.cleaned_data["email"],
                 company=new_company,
             )
+            u.set_password(_form.cleaned_data["password"])
         except Exception as e:
             print("error while registering ", e)
             return render(
@@ -40,3 +50,13 @@ def register_view(request):
         return render(request, template, {**context, "register_status": 201})
     print("form errors ", _form.errors)
     return render(request, template, {**context, "register_status": _form.errors})
+
+
+def validate_register_fields(fields):
+    state = True
+    reason = None
+    if Company.objects.filter(title=fields["company"]).exists():
+        return False, "Company name already exists."
+    if fields["password"] != fields["re_password"]:
+        return False, "Passwords do no match!"
+    return state, reason
