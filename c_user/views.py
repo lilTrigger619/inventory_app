@@ -1,16 +1,37 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.views import LoginView
+from django.contrib.auth import authenticate, login
 from django.utils.html import json_script
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 from .models import Company, C_user
 
 
 def login_temp_view(request):
     template = "./c_user/login.html"
-    if not request.method == "POST":
-        print("redirection made")
-        return redirect("/auth/llogin")
-    return render(request, template)
+    context = {"err": "", "companies": Company.objects.all()}
+    print("companies", context)
+    if request.method == "POST":
+        print("its a post", request.POST)
+        post_data = LoginForm(request.POST)
+        if post_data.is_valid():
+            cred_ = {
+                "username": post_data.cleaned_data["username"],
+                "password": post_data.cleaned_data["password"],
+            }
+            # check the user credentials
+            the_user = authenticate(request, **cred_)
+            # when there is no user.
+            if not the_user:
+                context["err"] = "Invalid username or password!"
+                return render(request, template, {**context})
+            # login the user
+            login(request, the_user)
+            return redirect("stock:dashboard")
+        # invalid post data
+        context["err"] = post_data.errors
+        return render(request, template, {**context})
+    # get request
+    print("its a get request.")
+    return render(request, template, context)
 
 
 def register_view(request):
@@ -39,6 +60,7 @@ def register_view(request):
                 company=new_company,
             )
             u.set_password(_form.cleaned_data["password"])
+            u.save()
         except Exception as e:
             print("error while registering ", e)
             return render(

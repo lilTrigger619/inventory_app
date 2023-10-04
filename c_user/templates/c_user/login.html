@@ -4,10 +4,21 @@
 {%block content%}
 <div class="container">
 	<div class="max-w-50 m-auto">
+		{% if err != "" %}
+		<div class="alert alert-danger alert-dismissible">
+			<button class="btn-close" data-bs-dismiss="alert" type="button">&times;</button>
+			<strong>Failed to login!</strong> 
+			<br/>
+			<p>Reason: 
+			{{ err }}
+			</p>
+		</div>
+		{% endif %}
 		<form action="{%url 'auth:login'%}" method="POST">
+			{% csrf_token %}
 			<div class="form-group">
 				<label for="company">Company</label>
-				<select class="form-control" id="company" name="category" required>
+				<select class="form-control" id="company" name="company" required>
 					{% for company in companies %}
 					<option value="{{company.id}}">{{ company.title }}</option>
 					{% endfor %}
